@@ -18,7 +18,7 @@ These functions set the following properties in the API search string
     Category: The name of the api function to call. Checked against constants list.
    
     Sub_category: 
-        Company ticker or list of tickers to search
+        Company ticker or list of tickers to search  (symbol) (interval)
         A interval range ["1min","5min","15min","30min","1hour","4hour"]
 
     Query_param: A date range in format ?from=2018-03-12&to=2019-03-12
@@ -27,7 +27,7 @@ These functions set the following properties in the API search string
     https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?from=2018-03-12&to=2019-03-12
 
     rb.set_category('historical-price-full')
-    rb.add_sub_category(symbol)
+    rb.add_sub_category('aapl'), rb.add_sub_category("1hour")
     rb.set_query_params(_range)  - Range = {'from': _from}, {'to': _from}
 
     @FMPDecorator.format_data will format the http response to json or Pandas Dataframe
@@ -60,6 +60,16 @@ class FMP(object):
         rb.add_sub_category(symbol)
         quote = self.__do_request__(rb.compile_request())
         return quote
+    
+    @FMPDecorator.write_to_file
+    @FMPDecorator.format_data
+    def get_company_profile(self, symbol):
+        rb = RequestBuilder(self.api_key)
+        rb.set_category('profile')
+        rb.add_sub_category(symbol)
+        quote = self.__do_request__(rb.compile_request())
+        return quote
+
     
     @FMPDecorator.write_to_file
     @FMPDecorator.format_data
