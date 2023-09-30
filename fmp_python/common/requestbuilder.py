@@ -5,11 +5,7 @@ from fmp_python.common.fmpexception import FMPException
 
 
 class RequestBuilder(object):
-    """
-    category: The name of the api function to call. Checked against constants list.
-    sub_category: Company ticker to search
-    query_param: A date range in format ?from=2018-03-12&to=2019-03-12
-    """
+
 
     def __init__(self, api_key):
         self.api_key = api_key

@@ -13,7 +13,7 @@ Base class that implements api calls
 
 USAGE
 
-The functions provided set the following properties in the API search string
+These functions set the following properties in the API search string
 
     Category: The name of the api function to call. Checked against constants list.
    
@@ -29,6 +29,8 @@ The functions provided set the following properties in the API search string
     rb.set_category('historical-price-full')
     rb.add_sub_category(symbol)
     rb.set_query_params(_range)  - Range = {'from': _from}, {'to': _from}
+
+    @FMPDecorator.format_data will format the http response to json or Pandas Dataframe
 
 """
 
@@ -58,6 +60,16 @@ class FMP(object):
         rb.add_sub_category(symbol)
         quote = self.__do_request__(rb.compile_request())
         return quote
+    
+    @FMPDecorator.write_to_file
+    @FMPDecorator.format_data
+    def get_company_list(self):
+        rb = RequestBuilder(self.api_key)
+        rb.set_category('stock/list')
+        quote = self.__do_request__(rb.compile_request())
+        print(quote)
+        return quote
+
 
     def get_index_quote(self, symbol):
         return FMP.get_quote(self, str(INDEX_PREFIX) + symbol)
@@ -103,4 +115,5 @@ class FMP(object):
         return hp
 
     def __do_request__(self, url):
+        print(url)
         return requests.get(url)
