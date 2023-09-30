@@ -8,9 +8,28 @@ from fmp_python.common.fmpdecorator import FMPDecorator
 from fmp_python.common.fmpvalidator import FMPValidator
 from fmp_python.common.fmpexception import FMPException
 
-
 """
 Base class that implements api calls
+
+USAGE
+
+The functions provided set the following properties in the API search string
+
+    Category: The name of the api function to call. Checked against constants list.
+   
+    Sub_category: 
+        Company ticker or list of tickers to search
+        A interval range ["1min","5min","15min","30min","1hour","4hour"]
+
+    Query_param: A date range in format ?from=2018-03-12&to=2019-03-12
+    
+    Example:
+    https://financialmodelingprep.com/api/v3/historical-price-full/AAPL?from=2018-03-12&to=2019-03-12
+
+    rb.set_category('historical-price-full')
+    rb.add_sub_category(symbol)
+    rb.set_query_params(_range)  - Range = {'from': _from}, {'to': _from}
+
 """
 
 

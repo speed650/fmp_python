@@ -3,8 +3,8 @@ INDEX_PREFIX = "^"
 SUPPORTED_INTERVALS = ["1min","5min","15min","30min","1hour","4hour"]
 SUPPORTED_CATEGORIES = [
     'profile',
-    'quote',
-    'quote-short',
+    'quote', #Available
+    'quote-short',  #Available
     'quotes',
     'search',
     'search-ticker',
@@ -21,8 +21,8 @@ SUPPORTED_CATEGORIES = [
     'stock',
     'earning_calendar',
     'historical',
-    'historical-chart',
-    'historical-price-full',
+    'historical-chart',  #Available
+    'historical-price-full', #Available
     'stock-screener',
     'rss_feed',
     'sp500_constituent',
